@@ -1,0 +1,19 @@
+# Disclaimer
+
+This is a work-in-progress project. (WIP)
+
+# Test
+
+docker-compose exec yarn bash
+
+> Set env variables:
+> PATH=$PATH:/usr/local/hadoop/bin 
+> HADOOP_PREFIX=/usr/local/hadoop
+
+> cd $HADOOP_PREFIX
+> hadoop jar $HADOOP_PREFIX/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.1.jar teragen 500 /teragen
+> 
+> hadoop jar $HADOOP_PREFIX/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.1.jar randomwriter randomout
+> *Check output*
+> bin/hdfs dfs -cat randomout/*
+

@@ -1,0 +1,56 @@
+
+version: "3"
+services:
+  namenode:
+    image: portworx/hadoop-namenode:2.7.1
+    restart: always
+    ports:
+      - "50070:50070"
+    networks:
+      - hadoopnet
+
+  yarn:
+    image: portworx/hadoop-yarn:2.7.1
+    restart: always
+    ports:
+      - "8088:8088"
+      - "19888:19888"
+    networks:
+      - hadoopnet
+    environment:
+      HADOOP_HOST_NAMENODE: "namenode"
+
+  datanode-node1:
+    image: portworx/hadoop-datanode:2.7.1
+    restart: always
+    networks:
+      - hadoopnet
+    environment:
+      HADOOP_HOST_NAMENODE: "namenode"
+      HADOOP_HOST_YARN: "yarn"
+
+  datanode-node2:
+    image: portworx/hadoop-datanode:2.7.1
+    restart: always
+    networks:
+      - hadoopnet
+    environment:
+      HADOOP_HOST_NAMENODE: "namenode"
+      HADOOP_HOST_YARN: "yarn"
+
+  datanode-node3:
+    image: portworx/hadoop-datanode:2.7.1
+    restart: always
+    networks:
+      - hadoopnet
+    environment:
+      HADOOP_HOST_NAMENODE: "namenode"
+      HADOOP_HOST_YARN: "yarn"
+
+# Namenode - http://[namenode]:50070
+# Resource Manager - http://[yarn]:8088
+# Job History - http://[yarn]:19888
+
+networks:
+  hadoopnet:
+
