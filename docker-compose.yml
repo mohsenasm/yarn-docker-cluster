@@ -10,7 +10,7 @@ services:
       - hadoopnet
 
   yarn:
-    image: portworx/hadoop-yarn:2.7.1
+    build: spark
     restart: always
     ports:
       - "8088:8088"
@@ -19,8 +19,6 @@ services:
       - hadoopnet
     environment:
       HADOOP_HOST_NAMENODE: "namenode"
-    volumes:
-      - "hadoop_conf:/usr/local/hadoop/etc/hadoop"
 
 
   datanode-node1:
@@ -50,15 +48,7 @@ services:
       HADOOP_HOST_NAMENODE: "namenode"
       HADOOP_HOST_YARN: "yarn"
 
-  spark:
-    build: spark
-    networks:
-      - hadoopnet
-    environment:
-      HADOOP_CONF_DIR: "/hadoop_conf"
-    volumes:
-      - "hadoop_conf:/hadoop_conf:ro"
-    command: bash
+
 
 # Namenode - http://[namenode]:50070
 # Resource Manager - http://[yarn]:8088
@@ -66,6 +56,3 @@ services:
 
 networks:
   hadoopnet:
-
-volumes:
-  hadoop_conf:

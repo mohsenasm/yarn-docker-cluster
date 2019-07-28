@@ -4,7 +4,7 @@
 #RUN git clone https://github.com/IBM/spark-tpc-ds-performance-test
 
 # for scala
-FROM hseeberger/scala-sbt:8u212_1.2.8_2.13.0
+FROM portworx/hadoop-yarn:2.7.1
 
 # for python3 + pip + pip3
 RUN apt-get update && apt-get install -y python-pip && apt-get install -y python3-pip && rm -rf /var/lib/apt/lists/*
@@ -28,8 +28,8 @@ spark.eventLog.enabled          true \n\
 spark.eventLog.dir              /tmp/spark-events \n\
 spark.history.fs.logDirectory   /tmp/spark-events \n\
 spark.master    yarn' > /usr/local/spark/conf/spark-defaults.conf && echo '\
-export HADOOP_CONF_DIR=$HADOOP_CONF_DIR \n\
-export SPARK_MASTER_IP=yarn' >> /usr/local/spark/conf/spark-env.sh
+export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop \n\
+export SPARK_MASTER_IP=localhost' >> /usr/local/spark/conf/spark-env.sh
 
 
 # copy TPC-DS performance test
