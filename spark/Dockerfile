@@ -35,4 +35,4 @@ export SPARK_MASTER_IP=localhost' >> /usr/local/spark/conf/spark-env.sh
 #COPY --from=git /root/spark-tpc-ds-performance-test /root/spark-tpc-ds-performance-test
 #COPY tpcdsenv.sh /root/spark-tpc-ds-performance-test/bin/tpcdsenv.sh
 
-ENTRYPOINT []
+ENTRYPOINT ["/entrypoint.sh"]
