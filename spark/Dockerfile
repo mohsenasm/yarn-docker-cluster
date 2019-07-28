@@ -7,7 +7,7 @@
 FROM portworx/hadoop-yarn:2.7.1
 
 # for python3 + pip + pip3
-RUN apt-get update && apt-get install -y python-pip && apt-get install -y python3-pip && rm -rf /var/lib/apt/lists/*
+RUN yum install -y python-pip && apt-get install -y python3-pip
 
 # install spark
 RUN wget http://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz && \
