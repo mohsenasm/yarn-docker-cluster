@@ -6,8 +6,7 @@
 # for scala
 FROM portworx/hadoop-yarn:2.7.1
 
-# for python3 + pip + pip3
-RUN yum install -y python-pip && apt-get install -y python3-pip
+RUN yum install -y wget
 
 # install spark
 RUN wget http://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz && \
@@ -18,7 +17,7 @@ RUN wget http://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop
     echo "export SPARK_HOME=/usr/local/spark" >> /root/.bashrc
 
 # install nano for development
-RUN apt-get update && apt-get install -y nano less && rm -rf /var/lib/apt/lists/*
+RUN yum install -y nano less && rm -rf /var/lib/apt/lists/*
 RUN echo "alias l='ls -CF'" >> /root/.bashrc && \
     echo "alias ll='ls -alF'" >> /root/.bashrc
 
